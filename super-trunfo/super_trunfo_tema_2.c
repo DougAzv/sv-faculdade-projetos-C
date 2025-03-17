@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <math.h>
+#include <string.h>
 
 int main(void) {
 
@@ -16,8 +17,8 @@ int main(void) {
     setlocale(LC_ALL, "Portuguese_Brazil");
     
     // Declaração de variáveis
-    char estado1[4], estado2[4], cod1[4], cod2[4], nomeCidade1[50], nomeCidade2[50];
-    int nPontosT1, nPontosT2, populacao1, populacao2;
+    char estado1[4], estado2[4], cod1[4], cod2[4], nomeCidade1[50], nomeCidade2[50], atributo[99];
+    int nPontosT1, nPontosT2, populacao1, populacao2, cAtributo;
     float pib1, pib2, area1, area2, calcDensidadePop1, calcDensidadePop2, calcPib1, calcPib2, vAtributo1, vAtributo2;
 
     // Entrada de dados para a Carta 1
@@ -100,23 +101,77 @@ int main(void) {
     printf("Densidade Populacional %.2f hab/km²\n", calcDensidadePop2);
     printf("PIB per Capita: %.2f reais\n\n", calcPib2);
 
-    // Declaração do atributo e atribuição de valores
-    char atributo[99] = "Densidade populacional";
-    vAtributo1 = calcDensidadePop1;
-    vAtributo2 = calcDensidadePop2;
+    // Exibição da escolha/opção de atributo
+    printf("Escolha um atributo para ser comparado: \n");
+
+    printf("1. População\n");
+    printf("2. Área\n");
+    printf("3. PIB\n");
+    printf("4. Número de Pontos Turísticos\n");
+    printf("5. Densidade Populacional\n");
+    printf("6. PIB per Capita\n");
+    scanf("%d", &cAtributo);
+
+    // Definição da estrutura de decisão Switch-case
+    // A variável vAtributo1 e vAtributo2, recebem os respectivos valores a depender da escolha do usuário
+    switch (cAtributo)
+    {
+    case 1:
+        strcpy(atributo, "População");
+        vAtributo1 = populacao1;
+        vAtributo2 = populacao2;
+        break;
+    case 2:
+        strcpy(atributo, "Área");
+        vAtributo1 = area1;
+        vAtributo2 = area2;
+        break;
+    case 3:
+        strcpy(atributo, "PIB");
+        vAtributo1 = pib1;
+        vAtributo2 = pib2;
+        break;
+    case 4:
+        strcpy(atributo, "Número de Pontos Turísticos");
+        vAtributo1 = nPontosT1;
+        vAtributo2 = nPontosT2;
+        break;
+    case 5:
+        strcpy(atributo, "Densidade Populacional");
+        vAtributo1 = calcDensidadePop2; //densidade inversamente colocada para que a comparação seja feita corretamente na estrutura de decisão
+        vAtributo2 = calcDensidadePop1; //densidade inversamente colocada para que a comparação seja feita corretamente na estrutura de decisão
+        break;
+    case 6:
+        strcpy(atributo, "PIB per Capita");
+        vAtributo1 = calcPib1;
+        vAtributo2 = calcPib2;
+        break;
+    default:
+        printf("Opção inválida!");
+        break;
+    }
 
     // Exibição das cartas/atributos da comparação
-    printf("Comparação de cartas (Atributo: %s)\n\n", atributo);
-    printf("Carta 1 - %s (%s): %.2f hab/km²\n", nomeCidade1, estado1, vAtributo1);
-    printf("Carta 2 - %s (%s): %.2f hab/km²\n", nomeCidade2, estado2, vAtributo2);
-
-    // Estrutura de decisão para a comparação de apenas um atributo
-    if (vAtributo1 < vAtributo2) {
-        printf("Resultado: Carta 1 (%s) venceu!", nomeCidade1);
+    printf("\nComparação de cartas (Atributo: %s)\n\n", atributo);
+    if (cAtributo == 1 || cAtributo == 4) { // Atributos inteiros
+        printf("Carta 1 - %s (%s): %d\n", nomeCidade1, estado1, (int)vAtributo1);
+        printf("Carta 2 - %s (%s): %d\n", nomeCidade2, estado2, (int)vAtributo2);
+    } else { // Atributos float
+        printf("Carta 1 - %s (%s): %.2f\n", nomeCidade1, estado1, vAtributo1);
+        printf("Carta 2 - %s (%s): %.2f\n", nomeCidade2, estado2, vAtributo2);
     }
-    else {
-        printf("Resultado: Carta 2 (%s) venceu!", nomeCidade2);
+
+    // Estrutura de decisão para a comparação
+    if (vAtributo1 > vAtributo2) {
+        printf("Resultado: Carta 1 (%s) venceu!\n", nomeCidade1);
+    } else if (vAtributo1 < vAtributo2) {
+        printf("Resultado: Carta 2 (%s) venceu!\n", nomeCidade2);
+    } else {
+        printf("Resultado: Empate!\n");
     }
 
     return 0;
 }
+
+
+
