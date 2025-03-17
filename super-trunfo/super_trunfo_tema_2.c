@@ -16,9 +16,8 @@ int main(void) {
     setlocale(LC_ALL, "Portuguese_Brazil");
     
     // Declaração de variáveis
-    char estado1[4], estado2[4], cod1[4], cod2[4], nomeCidade1[50], nomeCidade2[50], atributo[100];
-    int nPontosT1, nPontosT2;
-    int populacao1, populacao2;
+    char estado1[4], estado2[4], cod1[4], cod2[4], nomeCidade1[50], nomeCidade2[50];
+    int nPontosT1, nPontosT2, populacao1, populacao2;
     float pib1, pib2, area1, area2, calcDensidadePop1, calcDensidadePop2, calcPib1, calcPib2, vAtributo1, vAtributo2;
 
     // Entrada de dados para a Carta 1
@@ -102,14 +101,14 @@ int main(void) {
     printf("PIB per Capita: %.2f reais\n\n", calcPib2);
 
     // Declaração do atributo e atribuição de valores
-    atributo[99] = "Densidade populacional";
+    char atributo[99] = "Densidade populacional";
     vAtributo1 = calcDensidadePop1;
     vAtributo2 = calcDensidadePop2;
 
     // Exibição das cartas/atributos da comparação
     printf("Comparação de cartas (Atributo: %s)\n\n", atributo);
-    printf("Carta 1 - %s (%s): %.2f hab/km²\n", nomeCidade1, cod1, vAtributo1);
-    printf("Carta 2 - %s (%s): %.2f hab/km²\n", nomeCidade2, cod2, vAtributo2);
+    printf("Carta 1 - %s (%s): %.2f hab/km²\n", nomeCidade1, estado1, vAtributo1);
+    printf("Carta 2 - %s (%s): %.2f hab/km²\n", nomeCidade2, estado2, vAtributo2);
 
     // Estrutura de decisão para a comparação de apenas um atributo
     if (vAtributo1 < vAtributo2) {
