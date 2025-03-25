@@ -31,7 +31,7 @@ int main(void) {
     scanf("%s", cod1);
 
     printf("Nome da Cidade: ");
-    scanf(" %49[^\n]", nomeCidade1);
+    scanf(" %49[^\n]", nomeCidade1); // %s não utilizado, pois não lê espaços em branco (como espaços, tabs ou quebras de linha)
 
     printf("População: ");
     scanf("%lu", &populacao1);
@@ -56,7 +56,7 @@ int main(void) {
     printf("Nome da Cidade: %s\n", nomeCidade1);
     printf("População: %lu\n", populacao1);
     printf("Área %.2f km² \n", area1);
-    printf("PIB: %.2f bilhões de reais\n", pib1 / 1e9); //divisão por 1bi, para que quando exibido, apareça no formato correto
+    printf("PIB: %.2f bilhões de reais\n", pib1 / 1e9); // divisão por 1bi, para que quando exibido, apareça no formato correto
     printf("Número de Pontos Turísticos: %d\n", nPontosT1);
     printf("Densidade Populacional %.2f hab/km²\n", calcDensidadePop1);
     printf("PIB per Capita: %.2f reais\n\n", calcPib1);
@@ -71,7 +71,7 @@ int main(void) {
     scanf("%s", cod2);
 
     printf("Nome da Cidade: ");
-    scanf(" %49[^\n]", nomeCidade2);
+    scanf(" %49[^\n]", nomeCidade2); // %s não utilizado, pois não lê espaços em branco (como espaços, tabs ou quebras de linha)
 
     printf("População: ");
     scanf("%lu", &populacao2);
@@ -96,7 +96,7 @@ int main(void) {
     printf("Nome da Cidade: %s\n", nomeCidade2);
     printf("População: %lu\n", populacao2);
     printf("Área %.2f km² \n", area2);
-    printf("PIB: %.2f bilhões de reais\n", pib2 / 1e9); //divisão por 1bi, para que quando exibido, apareça no formato correto
+    printf("PIB: %.2f bilhões de reais\n", pib2 / 1e9); // divisão por 1bi, para que quando exibido, apareça no formato correto
     printf("Número de Pontos Turísticos: %d\n", nPontosT2);
     printf("Densidade Populacional %.2f hab/km²\n", calcDensidadePop2);
     printf("PIB per Capita: %.2f reais\n\n", calcPib2);
@@ -110,7 +110,7 @@ int main(void) {
     superPoder1 = (float)area1 + (float)populacao1 + inversoDensidade1 + calcPib1 + (float)nPontosT1 + pib1;
     superPoder2 = (float)area2 + (float)populacao2 + inversoDensidade2 + calcPib2 + (float)nPontosT2 + pib2;
 
-    // Comparação dos atributos
+    // Comparação dos atributos - resultado exibido como 1 (true) ou 0 (false)
     vencedorPopulacao = (populacao1 > populacao2);
     vencedorArea = (area1 > area2);
     vencedorPib = (pib1 > pib2);
@@ -118,6 +118,12 @@ int main(void) {
     vencedorDensidade = (calcDensidadePop1 < calcDensidadePop2); // Menor densidade vence
     vencedorPibPc = (calcPib1 > calcPib2);
     vencedorSuperPoder = (superPoder1 > superPoder2);
+
+    // lógica utilizada para a exibição dos resultados: 
+    // A comparação anterior gera o valor 1 (true) ou 0 (false), então na exibição do resultado é feita a subtração "2 - vencedorAlgumaCoisa" (dois menos vencedorAlgumaCoisa)
+    // Então se a comparação anterior gerou um resultado true, a subtração seria 2 - 1 = 1
+    // Porém se a comparação anterior gerar um resultado false, a subtração seria 2 - 0 = 2
+    // Então se o resultado for true, a carta 1 vence (2 - 1 = 1), se for false a carta 2 vence (2 - 0 = 2)
 
     // Exibição dos resultados das comparações:
     printf("\nResultados das Comparações:\n");
